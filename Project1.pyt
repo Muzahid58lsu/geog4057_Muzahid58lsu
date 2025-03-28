@@ -2,6 +2,7 @@
 
 import arcpy
 import ComplexNumber
+import HelloWorld
 
 
 class Toolbox:
@@ -24,7 +25,7 @@ class Tool:
     def getParameterInfo(self):
         """Define the tool parameters."""
         param1 = arcpy.Parameter(
-            displayName="Real",
+            displayName="Real1",
             name="real",
             datatype="GPDouble",
             parameterType="Required",
@@ -38,7 +39,7 @@ class Tool:
             direction="Input",
         )
         param3 = arcpy.Parameter(
-            displayName="Real",
+            displayName="Real1",
             name="imag",
             datatype="GPDouble",
             parameterType="Required",
@@ -46,7 +47,7 @@ class Tool:
         )
         param4 = arcpy.Parameter(
             displayName="Imaginary",
-            name="imag",
+            name="imag1",
             datatype="GPDouble",
             parameterType="Required",
             direction="Input",
@@ -72,6 +73,17 @@ class Tool:
 
     def execute(self, parameters, messages):
         """The source code of the tool."""
+        img1 = parameters[1].value
+        real1 = parameters[0].value
+        img2 = parameters[3].value
+        real2 = parameters[2].value
+        c1 = HelloWorld.ComplexNumber (real1, img1)
+        c2 = HelloWorld.ComplexNumber (real2, img2)
+        c3 = c1.add(c2)
+        messages.addMessages(
+            "The sum of the two complex number is: "
+            +str(c3.real)+ " + " + str(c3.imag) + "i")
+        
         return
 
     def postExecute(self, parameters):
